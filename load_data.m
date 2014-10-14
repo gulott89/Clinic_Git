@@ -1,7 +1,7 @@
 function [data, labels] = load_data(dataset, opts)
 % [data,labels] = load_data(dataset, opts)
 
-addpath ./FEAST
+addpath ../../Code/FEAST
 
 % Loads the data
 switch dataset

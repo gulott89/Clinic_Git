@@ -7,7 +7,8 @@ clear
 close all
 
 %Loads the FEAST Toolbox
-addpath ./FEAST
+addpath ../../Code/FEAST
+addpath ../../Code/MIToolbox
 
 % Create anon (calc error)and variables
 % and select dataset and classifier
