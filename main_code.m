@@ -1,17 +1,13 @@
-% subset selection with opts
-% gavin brown paper..do feature subset selection on labels and data train
-% do this inside classifier eval..obs in rows, feat columns
-
 clc
 clear
 close all
 
-%Loads the FEAST Toolbox
+%Loads Necessary Toolboxes
 addpath ../../Code/FEAST
 addpath ../../Code/MIToolbox
+addpath ../../Code/jsonlab
 
-% Create anon (calc error)and variables
-% and select dataset and classifier
+% Create anon (calc error)and variables, select dataset and classifier
 calc_error = @(x,y) sum(x~=y)/length(y); 
 k_folds=5;
 dataset = 'ionosphere';

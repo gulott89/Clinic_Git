@@ -1,5 +1,7 @@
 function err = classifier_eval(type, data_train, labels_train, data_test, labels_test, opts)
 
+addpath ../../Code/FEAST
+
 calc_error = @(x,y) sum(x~=y)/length(y);
 
 if (opts.RunSubset == 1)
