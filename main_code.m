@@ -5,12 +5,11 @@ close all
 %Loads Necessary Toolboxes
 addpath ../../Code/FEAST
 addpath ../../Code/MIToolbox
-addpath ../../Code/jsonlab
 
 % Create anon (calc error)and variables, select dataset and classifier
 calc_error = @(x,y) sum(x~=y)/length(y); 
 k_folds=5;
-dataset = 'ionosphere';
+dataset = 'AmericanGutOV';
 classifier = 'naivebayes';
 
 data_opts.MU = {[1,1] [-1,-1]};

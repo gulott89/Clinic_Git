@@ -1,7 +1,7 @@
 function [data, labels] = load_data(dataset, opts)
 % [data,labels] = load_data(dataset, opts)
 
-addpath ../../Code/FEAST
+addpath ../../Server_Data/
 
 % Loads the data
 switch dataset
@@ -40,6 +40,20 @@ switch dataset
                 axis tight;
             end
         end
+        
+     case 'AmericanGutOV'
+         M = importdata('ag_g_d_oveg.data');
+         N = importdata('ag_g_d_oveg.label');
+         Q = importdata('ag_g_d_oveg.features');
+         data= M;
+         [~,~,labels] = unique(N);
+        
+      case 'AmericanGutSex'
+         M = importdata('ag_g_sex.data');
+         N = importdata('ag_g_sex.label');
+         Q = importdata('ag_g_sex.features');
+         data= M;
+         [~,~,labels] = unique(N);
             
     otherwise
         error('unknown data!')
