@@ -1,4 +1,4 @@
-function err = classifier_eval(type, data_train, labels_train, data_test, labels_test, opts)
+function [err,imp_feats] = classifier_eval(type, data_train, labels_train, data_test, labels_test, opts)
 
 addpath ../../Code/FEAST
 

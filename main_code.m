@@ -73,7 +73,7 @@ for k = 1:k_folds
    idx_train = cv.training(k);
    idx_test = cv.test(k);
    
-   err(k) = classifier_eval(classifier, data(idx_train,:), ...
+   [err(k),imp_feats{k}] = classifier_eval(classifier, data(idx_train,:), ...
    labels(idx_train), data(idx_test,:), labels(idx_test), opts);
    
 end
