@@ -5,6 +5,7 @@ close all
 %Loads Necessary Toolboxes
 addpath ../../Code/FEAST
 addpath ../../Code/MIToolbox
+addpath ../../Server_Data/
 
 % Create anon (calc error)and variables, select dataset and classifier
 calc_error = @(x,y) sum(x~=y)/length(y); 
@@ -45,7 +46,7 @@ opts.Method = 'jmi';
 opts.numToSelect = 3;
 opts.RunSubset = 1;
 
-[data,labels] = load_data(dataset);
+[data,labels,features] = load_data(dataset);
 
 % perm the data and labels
 idx = randperm(length(labels)); 
@@ -75,9 +76,12 @@ for k = 1:k_folds
    
    [err(k),imp_feats{k}] = classifier_eval(classifier, data(idx_train,:), ...
    labels(idx_train), data(idx_test,:), labels(idx_test), opts);
+   features{imp_feats{k}}
    
 end
 runtime = toc;
+
+MutualInfo = mi(data,labels);
 
 cv_error = mean(err);
 disp(cv_error)

@@ -1,6 +1,6 @@
-function [data, labels] = load_data(dataset, opts)
-% [data,labels] = load_data(dataset, opts)
+function [data, labels,features] = load_data(dataset, opts)
 
+features={};
 addpath ../../Server_Data/
 
 % Loads the data
@@ -45,6 +45,7 @@ switch dataset
          M = importdata('ag_g_d_oveg.data');
          N = importdata('ag_g_d_oveg.label');
          Q = importdata('ag_g_d_oveg.features');
+         features = Q;
          data= M;
          [~,~,labels] = unique(N);
         
@@ -52,6 +53,7 @@ switch dataset
          M = importdata('ag_g_sex.data');
          N = importdata('ag_g_sex.label');
          Q = importdata('ag_g_sex.features');
+         features = Q;
          data= M;
          [~,~,labels] = unique(N);
             
