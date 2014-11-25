@@ -81,7 +81,26 @@ for k = 1:k_folds
 end
 runtime = toc;
 
-MutualInfo = mi(data,labels);
+for i=1:size(data,2)
+MI(i) = mi(data(:,i),labels);
+end
+figure
+hist(MI,20)
+title('Histogram of Mutual Information')
+xlabel('Distribution')
+ylabel('Frequency')
+
+% for i=1:size(data,2)
+%     for J=1:size(data,2)
+%     CMI(i,J) = cmi(data(:,i),data(:,J),labels);
+%     %CMI(J,i) = CMI(i,J);
+%     end
+% end
+% figure(2)
+% hist(CMI,20)
+% title('Histogram of Conditional Mutual Information')
+% xlabel('Distribution')
+% ylabel('Frequency')
 
 cv_error = mean(err);
 disp(cv_error)

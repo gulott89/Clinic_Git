@@ -46,7 +46,18 @@ switch dataset
          N = importdata('ag_g_d_oveg.label');
          Q = importdata('ag_g_d_oveg.features');
          features = Q;
-         data= M;
+         
+         data = zeros(size(M));
+  for i = 1:size(M,2)
+    [nel,nce] = hist(M(:,i), floor(sqrt(size(M,2))));
+    [bincounts,ind]= histc(M(:,i), nce);
+    data(:,i) = ind+1;
+  end
+  
+  remove = find(sum(M)<size(M,1)*.1);
+  M(:,remove) = [];
+  Q(remove) = [];
+         
          [~,~,labels] = unique(N);
         
       case 'AmericanGutSex'
@@ -54,8 +65,20 @@ switch dataset
          N = importdata('ag_g_sex.label');
          Q = importdata('ag_g_sex.features');
          features = Q;
-         data= M;
+         
+         data = zeros(size(M));
+  for i = 1:size(M,2)
+    [nel,nce] = hist(M(:,i), floor(sqrt(size(M,2))));
+    [bincounts,ind]= histc(M(:,i), nce);
+    data(:,i) = ind+1;
+  end
+  
+  remove = find(sum(M)<size(M,1)*.1);
+  M(:,remove) = [];
+  Q(remove) = [];
+         
          [~,~,labels] = unique(N);
+        
             
     otherwise
         error('unknown data!')
