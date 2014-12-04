@@ -49,7 +49,7 @@ switch dataset
          
          data = zeros(size(M));
   for i = 1:size(M,2)
-    [nel,nce] = hist(M(:,i), floor(sqrt(size(M,2))));
+    [nel,nce] = hist(M(:,i), 50);
     [bincounts,ind]= histc(M(:,i), nce);
     data(:,i) = ind+1;
   end
@@ -68,7 +68,7 @@ switch dataset
          
          data = zeros(size(M));
   for i = 1:size(M,2)
-    [nel,nce] = hist(M(:,i), floor(sqrt(size(M,2))));
+    [nel,nce] = hist(M(:,i), 50);
     [bincounts,ind]= histc(M(:,i), nce);
     data(:,i) = ind+1;
   end

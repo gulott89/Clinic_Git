@@ -1,5 +1,5 @@
 clc
-clear
+clear all
 close all
 
 %Loads Necessary Toolboxes
@@ -81,8 +81,11 @@ for k = 1:k_folds
 end
 runtime = toc;
 
+cv_error = mean(err);
+disp(cv_error)
+
 for i=1:size(data,2)
-MI(i) = mi(data(:,i),labels);
+    MI(i) = mi(data(:,i),labels);
 end
 figure
 hist(MI,20)
@@ -90,19 +93,21 @@ title('Histogram of Mutual Information')
 xlabel('Distribution')
 ylabel('Frequency')
 
-% for i=1:size(data,2)
-%     for J=1:size(data,2)
-%     CMI(i,J) = cmi(data(:,i),data(:,J),labels);
-%     %CMI(J,i) = CMI(i,J);
-%     end
-% end
-% figure(2)
-% hist(CMI,20)
-% title('Histogram of Conditional Mutual Information')
-% xlabel('Distribution')
-% ylabel('Frequency')
+[~,index]=sort(MI,'descend');
+datanew = data(:,index([1:500]));
+for i=1:size(datanew,2)
+    for J=1:size(datanew,2)
+     CMI(i,J) = cmi(datanew(:,i),datanew(:,J),labels);
+     CMI(J,i) = CMI(i,J);
+    end
+end
+figure(2)
+pcolor(log(CMI))
+shading interp
+colorbar
+title('Log Intensity Plot of Conditional Mutual Information')
+xlabel('Features')
+ylabel('Features')
 
-cv_error = mean(err);
-disp(cv_error)
 save(['classification_',opts.classifier_type,'_cv',num2str(k_folds),...
     '_',dataset,'.mat']);
